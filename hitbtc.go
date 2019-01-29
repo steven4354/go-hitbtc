@@ -118,21 +118,21 @@ func (b *HitBtc) GetTicker(market string) (ticker Ticker, err error) {
 }
 
 // GetAllTicker is used to get the current ticker values for all markets.
-func (b *HitBtc) GetAllTicker() (tickers Tickers, err error) {
-	r, err := b.client.do("GET", "public/ticker", nil, false)
-	if err != nil {
-		return
-	}
-	var response interface{}
-	if err = json.Unmarshal(r, &response); err != nil {
-		return
-	}
-	if err = handleErr(response); err != nil {
-		return
-	}
-	err = json.Unmarshal(r, &tickers)
-	return
-}
+//func (b *HitBtc) GetAllTicker() (tickers Tickers, err error) {
+//	r, err := b.client.do("GET", "public/ticker", nil, false)
+//	if err != nil {
+//		return
+//	}
+//	var response interface{}
+//	if err = json.Unmarshal(r, &response); err != nil {
+//		return
+//	}
+//	if err = handleErr(response); err != nil {
+//		return
+//	}
+//	err = json.Unmarshal(r, &tickers)
+//	return
+//}
 
 
 // Market
