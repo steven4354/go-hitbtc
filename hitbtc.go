@@ -58,7 +58,7 @@ func handleErr(r interface{}) error {
 
 // HitBtc represent a HitBTC client
 type HitBtc struct {
-	client *client
+	client *Client
 }
 
 // SetDebug sets enable/disable http request/response dump
@@ -425,3 +425,4 @@ func (b *HitBtc) TransferBalance(currency string, amount float64, transferType t
 	transferID = transfer.ID
 	return
 }
+
