@@ -211,7 +211,7 @@ func (b *HitBtc) GetTrades(currencyPair string) (trades []Trade, err error) {
 	return
 }
 
-// CancelOrder cancels a pending order
+// CancelOrder cancels a pending order using currency pair
 func (b *HitBtc) CancelOrder(currencyPair string) (orders []Order, err error) {
 	payload := make(map[string]string)
 	if currencyPair != "all" {
@@ -231,6 +231,26 @@ func (b *HitBtc) CancelOrder(currencyPair string) (orders []Order, err error) {
 	err = json.Unmarshal(r, &orders)
 	return
 }
+
+// CancelOrder cancels a pending order using order id
+func (b *HitBtc) CancelOrderUsingOrderId(orderId string) (order Order, err error) {
+	payload := make(map[string]string)
+	resource := "order/" + orderId
+	r, err := b.client.do("DELETE", resource, payload, true)
+	if err != nil {
+		return
+	}
+	var response interface{}
+	if err = json.Unmarshal(r, &response); err != nil {
+		return
+	}
+	if err = handleErr(response); err != nil {
+		return
+	}
+	err = json.Unmarshal(r, &order)
+	return
+}
+
 
 // GetOrder gets a pending order data.
 func (b *HitBtc) GetOrder(orderId string) (orders []Order, err error) {
